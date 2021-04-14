@@ -31,21 +31,32 @@ class LinkedList:
         itr.next = Node( n )
 
     def printlist(self):
-        # follows the same principle as add above, but you print instead
+        # follows the same iteration principle as add above, but you print instead
         itr = self.head
         while itr:
             print(itr.val)
             itr = itr.next
 
     def reverse(self):
-        pass
+        # we are going to play around with three nodes
+        prev = None
+        current = self.head
+        while current:
+            next_ = current.next
+            current.next = prev
+            prev = current
+            current = next_
+        self.head = prev
+        self.printlist()
+            
+
 
     def getIndexOf(self, val):
         """
-        I don't think this function is supposed to exist in a linkedlist
+        I don't think this function exists in a linkedlist
         I only built it to solidify my manipulation of linkedlists
         -----
-        Returns: Index of node that contains the specified value, hence None
+        Returns: Index of node that contains the specified value, else False
         """
         count = 0
         itr = self.head
@@ -55,7 +66,16 @@ class LinkedList:
             else:
                 itr = itr.next
                 count += 1
-        return -1 # did not find it
+        return False # did not find it
+
+    def swapIndexes(self, a, b):
+        pass
+
+    def swapValues(self, i, j):
+        pass
+
+    def sortList(self):
+        pass
 
 
 
@@ -77,7 +97,7 @@ def test_reversing_of_linked_list(obj):
     # obj.printlist()
 
 def test_getIndexOf_value(obj, x):
-    print(obj.getIndexOf(3))
+    print(obj.getIndexOf(x))
 
 if __name__ == "__main__":
     obj = LinkedList() # instantiate a linked list
@@ -89,3 +109,5 @@ if __name__ == "__main__":
     test_reversing_of_linked_list(obj)
 
     # test_getIndexOf_value(obj, 2)
+
+    # test_getIndexOf_value(obj, 7)
