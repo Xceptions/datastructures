@@ -83,7 +83,21 @@ class LinkedList:
         return False  # did not find it
 
     def deleteNode(self, val):
-        pass
+        """
+        Iterate through the list until you find the value, then set its previous.next to its next
+        -----
+        Returns: True if deleted, else False
+        """
+        if self.head.val == val:
+            self.head = self.head.next
+            return True
+        itr = self.head
+        while itr.next:
+            if itr.next.val == val:
+                itr.next = itr.next.next
+                return True
+            itr = itr.next
+        return False  # the node did not exist
 
     def swapIndexes(self, a, b):
         pass
@@ -118,6 +132,11 @@ def test_getIndexOf_value(obj, x):
     print(obj.getIndexOf(x))
 
 
+def test_deletion_of_node(obj, x):
+    obj.deleteNode(x)
+    obj.printlist()
+
+
 if __name__ == "__main__":
     obj = LinkedList()  # instantiate a linked list
 
@@ -127,6 +146,8 @@ if __name__ == "__main__":
 
     test_reversing_of_linked_list(obj)
 
-    # test_getIndexOf_value(obj, 2)
+    test_deletion_of_node(obj, 2)
 
-    # test_getIndexOf_value(obj, 7)
+    test_getIndexOf_value(obj, 2)
+
+    test_getIndexOf_value(obj, 7)
