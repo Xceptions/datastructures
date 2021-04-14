@@ -5,7 +5,7 @@ class Node:
     -----
     Returns: None
     """
-    def __init__(self, val = None):
+    def __init__(self, val=None):
         self.val = val
         self.next = None
 
@@ -14,42 +14,56 @@ class LinkedList:
     """ Main LinkedList class will be callable """
 
     def __init__(self):
-        # initialize the head to None. The first value that comes into the class
-        # should be turned into the head
+        """
+        Initialize the head to None. The first value that comes into the class should
+        be turned into the head
+        -----
+        Returns: None
+        """
         self.head = None
 
     def add(self, n):
-        # if our head is none, then we have to add the first node as our head
-        if self.head == None:
-            self.head = Node( n )
+        """
+        If: our head is none, then we add the element to our list as our node
+        Else: we iterate through the list by shifting the pointer until we get to the end. Then add the node
+        -----
+        Returns: Bool
+        """
+        if self.head is None:
+            self.head = Node(n)
             return True
-        # iterate through the list by shifting the pointer until you get to the end of the list
-        # this is where you'll add the node
         itr = self.head
         while itr.next:
             itr = itr.next
-        itr.next = Node( n )
+        itr.next = Node(n)
+        return True
 
     def printlist(self):
-        # follows the same iteration principle as add above, but you print instead
+        """
+        Iterate through the linkedlist and print the value on each iteration
+        -----
+        Returns: None
+        """
         itr = self.head
         while itr:
             print(itr.val)
             itr = itr.next
 
     def reverse(self):
-        # we are going to play around with three nodes
+        """
+        For each node, save its next node, make its next to be its previous,
+        the previous to be the current, and the current to be the next
+        -----
+        Returns: None
+        """
         prev = None
         current = self.head
-        while current:
+        while current is not None:
             next_ = current.next
             current.next = prev
             prev = current
             current = next_
         self.head = prev
-        self.printlist()
-            
-
 
     def getIndexOf(self, val):
         """
@@ -66,7 +80,10 @@ class LinkedList:
             else:
                 itr = itr.next
                 count += 1
-        return False # did not find it
+        return False  # did not find it
+
+    def deleteNode(self, val):
+        pass
 
     def swapIndexes(self, a, b):
         pass
@@ -78,31 +95,33 @@ class LinkedList:
         pass
 
 
-
-
-
 """
 TEST FUNCTIONS
 """
+
 
 def test_adding_to_linked_list(obj, a):
     for x in a:
         obj.add(x)
 
+
 def test_printing_of_linked_list(obj):
     obj.printlist()
 
+
 def test_reversing_of_linked_list(obj):
     obj.reverse()
-    # obj.printlist()
+    obj.printlist()
+
 
 def test_getIndexOf_value(obj, x):
     print(obj.getIndexOf(x))
 
-if __name__ == "__main__":
-    obj = LinkedList() # instantiate a linked list
 
-    test_adding_to_linked_list(obj, [1,3,4,5,2,6])
+if __name__ == "__main__":
+    obj = LinkedList()  # instantiate a linked list
+
+    test_adding_to_linked_list(obj, [1, 3, 4, 5, 2, 6])
 
     test_printing_of_linked_list(obj)
 
