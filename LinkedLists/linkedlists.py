@@ -1,7 +1,7 @@
 class Node:
     """
     Node class contains the attributes of each node.
-    Only callable by our LinkedList class
+    Not callable. Only used by our LinkedList class
     -----
     Returns: None
     """
@@ -105,8 +105,22 @@ class LinkedList:
     def swapValues(self, i, j):
         pass
 
-    def sortList(self):
-        pass
+    def sortLinkedList(self):
+        """
+        To sort the linkedlist, I'm going to traverse it, save all the values, do a normal sort, then
+        create a new linked list with the values
+        """
+        temp_list = []
+        itr = self.head
+        while itr.next:
+            temp_list.append(itr.val)
+            itr = itr.next
+        temp_list.append(itr.val)
+        temp_list.sort()
+        newlist = LinkedList()
+        for x in temp_list:
+            newlist.add(x)
+        return newlist
 
 
 """
@@ -137,17 +151,23 @@ def test_deletion_of_node(obj, x):
     obj.printlist()
 
 
+def test_sort_linked_list(obj):
+    obj.sortLinkedList().printlist()
+
+
 if __name__ == "__main__":
     obj = LinkedList()  # instantiate a linked list
 
     test_adding_to_linked_list(obj, [1, 3, 4, 5, 2, 6])
 
-    test_printing_of_linked_list(obj)
+    # test_printing_of_linked_list(obj)
 
-    test_reversing_of_linked_list(obj)
+    # test_reversing_of_linked_list(obj)
 
-    test_deletion_of_node(obj, 2)
+    # test_deletion_of_node(obj, 2)
 
-    test_getIndexOf_value(obj, 2)
+    # test_getIndexOf_value(obj, 2)
 
-    test_getIndexOf_value(obj, 7)
+    # test_getIndexOf_value(obj, 7)
+
+    test_sort_linked_list(obj)
